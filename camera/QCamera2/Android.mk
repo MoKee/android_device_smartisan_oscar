@@ -41,7 +41,6 @@ LOCAL_SRC_FILES += \
         HAL/QCameraMuxer.cpp \
         HAL/QCameraMem.cpp \
         HAL/QCameraStateMachine.cpp \
-        util/QCameraDisplay.cpp \
         HAL/QCameraChannel.cpp \
         HAL/QCameraStream.cpp \
         HAL/QCameraPostProc.cpp \
@@ -112,7 +111,7 @@ LOCAL_C_INCLUDES += \
         $(TARGET_OUT_HEADERS)/qcom/display
 LOCAL_C_INCLUDES += \
         $(call project-path-for,qcom-display)/libqservice
-LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync libgui
+LOCAL_SHARED_LIBRARIES := liblog libhardware libutils libcutils libdl libsync
 LOCAL_SHARED_LIBRARIES += libmmcamera_interface libmmjpeg_interface libui libcamera_metadata
 LOCAL_SHARED_LIBRARIES += libqdMetaData libqservice libbinder
 LOCAL_SHARED_LIBRARIES += libcutils libdl
