@@ -299,3 +299,7 @@
 # Elliptic
 /dev/elliptic0            0666   root       root
 /dev/elliptic1            0666   root       root
+
+# /dev/sensors only supports an ioctl to get the current SLPI timestamp
+# allow the sensors daemon to perform this as non-root
+/dev/sensors              0660   system     system
