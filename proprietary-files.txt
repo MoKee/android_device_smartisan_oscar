@@ -1402,6 +1402,15 @@ etc/firmware/a530_pm4.fw
 etc/firmware/hbtp/hbtpcfg.dat
 etc/firmware/hbtp/qtc800s_dsp.bin
 
+# IFAA (Fingerprint support for Alipay)
+-framework/ifaa_fw.jar
+bin/ifaad
+lib/libifaa_daemon.so
+lib/libifaa_jni.so
+lib64/lib_ifaa_tac.so
+lib64/libifaa_daemon.so
+lib64/libifaa_jni.so
+
 # Sensors
 bin/sensors.qcom
 etc/elliptic_fusion_sensor.xml
