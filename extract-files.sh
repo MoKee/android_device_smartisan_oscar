@@ -36,19 +36,8 @@ fi
 # Default to sanitizing the vendor folder before extraction
 CLEAN_VENDOR=true
 
-while [ "$1" != "" ]; do
-    case $1 in
-        -n | --no-cleanup )     CLEAN_VENDOR=false
-                                ;;
-        -s | --section )        shift
-                                SECTION=$1
-                                CLEAN_VENDOR=false
-                                ;;
-        * )                     SRC=$1
-                                ;;
-    esac
-    shift
-done
+SRC=$1
+SRC_QC=$2
 
 if [ -z "$SRC" ]; then
     SRC=adb
@@ -58,7 +47,7 @@ fi
 setup_vendor "$DEVICE" "$VENDOR" "$MK_ROOT" false "$CLEAN_VENDOR"
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
-extract "$MY_DIR"/proprietary-files-qc.txt "$SRC" "$SECTION"
-extract "$MY_DIR"/proprietary-files-qc-perf.txt "$SRC" "$SECTION"
+extract "$MY_DIR"/proprietary-files-qc.txt "$SRC_QC" "$SECTION"
+extract "$MY_DIR"/proprietary-files-qc-perf.txt "$SRC_QC" "$SECTION"
 
 "$MY_DIR"/setup-makefiles.sh
