@@ -35,6 +35,10 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
+# Camera
+TARGET_LD_SHIM_LIBS += /system/lib/hw/camera.msm8953.so|/system/lib/libshim_camera.so
+TARGET_LD_SHIM_LIBS += /system/vendor/lib/libmmcamera_ppeiscore.so|/system/lib/libshim_camera.so
+
 # MK Hardware
 BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
 
