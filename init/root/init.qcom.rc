@@ -56,7 +56,8 @@ on early-boot
     setrlimit 8 67108864 67108864
     # Allow subsystem (modem etc) debugging
     write /sys/kernel/boot_adsp/boot 1
-    write /sys/kernel/boot_slpi/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
+    #write /sys/kernel/boot_slpi/boot 1
     exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
 on boot
@@ -188,10 +189,11 @@ on boot
     chown wifi wifi /sys/class/net/bond0/bonding/queue_id
 
     # Allow access to emmc rawdump block partition and dload sysfs node
-    chown root system /dev/block/bootdevice/by-name/rawdump -p /dev/block/
-    chmod 0660 /dev/block/bootdevice/by-name/rawdump -p /dev/block/
     chown root system /sys/kernel/dload/emmc_dload
     chmod 0660 /sys/kernel/dload/emmc_dload
+
+    #ddr_freq dynamic change interface
+    chown system system /sys/module/kernel/ddr_freq_en/ddr_freq_en
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -206,6 +208,7 @@ on post-fs-data
 
     #Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
+    mkdir /data/misc/camera/raw/ 0770 camera camera
 
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
@@ -255,9 +258,10 @@ on post-fs-data
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
+    chmod 0666 /sys/class/graphics/fb0/msm_fb_ie_level
     chown root system /persist
     chmod 0771 /persist
-    chown system system /persist/WCNSS_qcom_wlan_nv.bin
+    chown system system /system/etc/wifi/WCNSS_qcom_wlan_nv.bin
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
@@ -348,6 +352,9 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
+    #wanjl set adsp subsys restart level
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level SYSTEM
+
     # qti-logkit data
     mkdir /data/misc/qti-logkit/ 0771 system system
     mkdir /data/misc/qti-logkit/shared-privileged/ 2770 system system
@@ -364,6 +371,15 @@ on post-fs-data
     write /sys/block/dm-0/queue/read_ahead_kb 2048
     write /sys/block/dm-1/queue/read_ahead_kb 2048
 
+    # create QDMA related dirs
+    mkdir /data/misc/qdmastats 0700 system system
+    mkdir /data/misc/qdma 0770 system system
+    mkdir /data/misc/logd 0700 logd log
+    symlink /data/misc/logd /data/logs
+
+    # WAPI
+    mkdir /data/misc/wapi_certificate 0770 system wifi
+
 service nqnfcinfo /system/vendor/bin/nqnfcinfo
     class late_start
     group nfc
@@ -376,6 +392,18 @@ service perfd /system/vendor/bin/perfd
    group root readproc
    disabled
    socket perfd seqpacket 0666 root system
+
+service scitd /system/bin/scitd
+    class late_start
+    socket scitd stream 0660 system factory
+    user root
+    group root
+
+service sdbd /system/bin/sdbd
+    class main
+    socket sdbd stream 0660 root root
+    user system
+    group system
 
 service iop /system/bin/iop
     class main
@@ -1116,7 +1144,42 @@ service logdumpd /system/bin/logcat -b all -v threadtime -D -w /dev/block/bootde
 on property:ro.logdumpd.enabled=1
     start logdumpd
 
+service qdmastatsd /system/bin/qdmastatsd
+    class late_start
+    user system
+    group system
+
 service time_daemon /system/bin/time_daemon
     class main
     user root
     group root
+
+on property:sys.sdb.unlock=*
+    restart scitd
+
+on property:init.svc.scitd=running
+   chown root factory /dev/block/mmcblk0p10
+   chown root factory /dev/block/mmcblk0p29
+   chmod 0660 /dev/block/mmcblk0p10
+   chmod 0660 /dev/block/mmcblk0p29
+
+    chown system factory /sys/devices/virtual/timed_output/vibrator/enable
+    chown system factory /sys/class/leds/led:torch_0/brightness
+    chown system factory /sys/class/leds/led:torch_1/brightness
+    chown system factory /sys/class/leds/led:switch_0/brightness
+    chown system factory /sys/class/leds/led:switch_1/brightness
+    chown system factory /sys/class/leds/red/brightness
+    chown system factory /sys/class/leds/led:switch/brightness
+
+    chmod 0664 /sys/devices/virtual/timed_output/vibrator/enable
+    chmod 0664 /sys/class/leds/led:torch_0/brightness
+    chmod 0664 /sys/class/leds/led:torch_1/brightness
+    chmod 0664 /sys/class/leds/led:switch_0/brightness
+    chmod 0664 /sys/class/leds/led:switch_1/brightness
+    chmod 0664 /sys/class/leds/red/brightness
+    chmod 0664 /sys/class/leds/led:switch/brightness
+
+    chown root system /persist
+    chmod 0771 /persist
+    chown root system /persist/battery_cycle_count
+    chmod 0660 /persist/battery_cycle_count

@@ -41,6 +41,8 @@ on fs
     mount_all fstab.qcom
     write /proc/sys/vm/swappiness 100
 
+    start time_daemon
+
     # Keeping following partitions outside fstab file. As user may not have
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
@@ -81,8 +83,24 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
 
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system input
+
+service btlfpserver /system/bin/btlfpserver
+    class late_start
+    user system
+    group system input
+
 on init
    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+
+service per_proxy /system/bin/pm-proxy
+    class core
+    user system
+    group system
+    disabled
 
 service qfp-daemon /system/bin/qfp-daemon
    class late_start
@@ -158,6 +176,19 @@ on boot
     chown system drmrpc /sys/devices/soc.0/78b7000.i2c/i2c-3/3-0020/input/input0/secure_touch
     chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch_enable
     chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch
+
+    chmod 0666 /dev/goodix_fp
+
+    mkdir /dev/cpuset/dex2oat
+    write /dev/cpuset/dex2oat/cpus 0-4
+    write /dev/cpuset/dex2oat/mems 0
+    chown system system /dev/cpuset/dex2oat
+    chown system system /dev/cpuset/dex2oat/tasks
+    chmod 0666 /dev/cpuset/dex2oat/tasks
+
+# blestech fingerprint
+    chmod 0666	/dev/blfp
+    chmod 0666	/sys/class/timed_output/vibrator/play_voltage
 
 service wcnss-service /system/bin/wcnss_service
     class main
@@ -274,6 +305,11 @@ service per_proxy /system/bin/pm-proxy
     user system
     group system
     disabled
+
+service ifaad /system/bin/ifaad
+    class late_start
+    user  system
+    group system
 
 on property:init.svc.per_mgr=running
     start per_proxy
