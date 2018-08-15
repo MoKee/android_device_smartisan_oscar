@@ -1,0 +1,10 @@
+[
+  {
+   "repository": "android_vendor_smartisan_oscar",
+   "target_path": "vendor/smartisan/oscar"
+  },
+  {
+    "repository": "android_device_qcom_common",
+    "target_path": "device/qcom/common"
+  }
+]
