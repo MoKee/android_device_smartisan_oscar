@@ -181,6 +181,25 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8953 \
+    libgnsspps \
+    libgps.utils \
+    libloc_api_v02 \
+    libloc_core \
+    libloc_ds_api \
+    libloc_eng \
+    libloc_pla \
+    libloc_stub
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/etc/apdr.conf:system/etc/apdr.conf \
+    $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
+    $(LOCAL_PATH)/gps/etc/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/etc/izat.conf:system/etc/izat.conf \
+    $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf
+
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \

@@ -403,7 +403,6 @@ etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
 framework/QtiTelephonyServicelibrary.jar
 framework/embmslibrary.jar
-framework/qti-telephony-common.jar
 vendor/bin/qti
 vendor/lib/liblqe.so
 vendor/lib/libmdmdetect.so
