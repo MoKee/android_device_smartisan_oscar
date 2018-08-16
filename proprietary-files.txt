@@ -1,4 +1,8 @@
 # Audio
+lib/hw/audio.primary.msm8953.so
+lib/libaudioroute.so
+lib64/hw/audio.primary.msm8953.so
+lib64/libaudioroute.so
 vendor/lib/libhwdaphal.so
 vendor/lib64/libhwdaphal.so
 
@@ -1396,8 +1400,11 @@ etc/firmware/hbtp/qtc800s_dsp.bin
 
 # Sensors
 bin/sensors.qcom
+etc/elliptic_fusion_sensor.xml
+etc/elliptic_sensor.xml
 etc/sensors/hals.conf
 etc/sensors/sensor_def_qcomdev.conf
+lib64/libnotifyaudiohal.so
 vendor/lib/hw/activity_recognition.msm8953.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so

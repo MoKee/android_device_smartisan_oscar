@@ -97,7 +97,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio
 PRODUCT_PACKAGES += \
     audiod \
-    audio.primary.msm8953 \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \

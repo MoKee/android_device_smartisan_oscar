@@ -269,3 +269,7 @@
 /dev/block/platform/soc/7464900.sdhci/by-name/frp       0600   system     system
 /dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
 /dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
+
+# Elliptic
+/dev/elliptic0            0666   root       root
+/dev/elliptic1            0666   root       root
