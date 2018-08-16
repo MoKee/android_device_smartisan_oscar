@@ -6,6 +6,9 @@ lib64/libaudioroute.so
 vendor/lib/libhwdaphal.so
 vendor/lib64/libhwdaphal.so
 
+# Bluetooth
+lib/hw/bluetooth.default.so:lib/hw/bluetooth.msm8953.so
+
 # Bluetooth firmware
 etc/firmware/nvm_tlv.bin
 etc/firmware/nvm_tlv_1.3.bin
