@@ -200,6 +200,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/izat.conf:system/etc/izat.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf
 
+# Input
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/betterlife-blfp.kl:system/usr/keylayout/betterlife-blfp.kl
+
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
