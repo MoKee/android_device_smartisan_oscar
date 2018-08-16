@@ -81,4 +81,12 @@ $(WCNSS_NV_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_INI_SYMLINK) $(WCNSS_NV_SYMLINK)
 
+PRONTO_SYMLINK := $(TARGET_OUT)/lib/modules/wlan.ko
+$(PRONTO_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "PRONTO link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /system/lib/modules/pronto/pronto_wlan.ko $@
+ALL_DEFAULT_INSTALLED_MODULES += $(PRONTO_SYMLINK)
+
 endif
