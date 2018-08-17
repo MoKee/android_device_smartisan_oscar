@@ -1308,7 +1308,6 @@ vendor/lib/libchromatix_s5k3p8sp_preview.so
 vendor/lib/libchromatix_s5k3p8sp_snapshot.so
 
 # Camera configs
-etc/camera/camera_config.xml
 etc/camera/csidtg_camera.xml
 etc/camera/csidtg_chromatix.xml
 etc/camera/gc8034_chromatix.xml
