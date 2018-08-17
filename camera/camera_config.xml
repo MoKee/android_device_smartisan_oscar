@@ -111,31 +111,6 @@ LensInfo : Information of the lens present in the module.
     </LensInfo>
   </CameraModuleConfig>
   <CameraModuleConfig>
-    <CameraId>1</CameraId>
-    <ModuleId>2</ModuleId>
-    <SensorName>ov13358_truly</SensorName>
-    <ChromatixName>ov13358_truly_chromatix</ChromatixName>
-    <EepromName>truly_gt24c64a_ov13358</EepromName>
-    <ActuatorName>dw9800_truly_ov13358</ActuatorName>
-    <ModesSupported>1</ModesSupported>
-    <Position>BACK_AUX</Position>
-    <MountAngle>360</MountAngle>
-    <CSIInfo>
-      <CSIDCore>1</CSIDCore>
-      <LaneMask>0x1F</LaneMask>
-      <LaneAssign>0x4320</LaneAssign>
-      <ComboMode>0</ComboMode>
-    </CSIInfo>
-    <LensInfo>
-      <FocalLength>4.73</FocalLength>
-      <FNumber>2.2</FNumber>
-      <TotalFocusDistance>1.9</TotalFocusDistance>
-      <HorizontalViewAngle>64.1</HorizontalViewAngle>
-      <VerticalViewAngle>51.6</VerticalViewAngle>
-      <MinFocusDistance>0.1</MinFocusDistance>
-    </LensInfo>
-  </CameraModuleConfig>
-  <CameraModuleConfig>
     <CameraId>0</CameraId>
     <ModuleId>6</ModuleId>
     <SensorName>ov13855_qtech</SensorName>
@@ -162,31 +137,6 @@ LensInfo : Information of the lens present in the module.
     </LensInfo>
   </CameraModuleConfig>
   <CameraModuleConfig>
-    <CameraId>1</CameraId>
-    <ModuleId>0x25</ModuleId>
-    <SensorName>ov13358_qtech</SensorName>
-    <ChromatixName>ov13358_qtech_chromatix</ChromatixName>
-    <EepromName>qtech_gt24c64a_ov13358</EepromName>
-    <ActuatorName>dw9800_qtech_ov13358</ActuatorName>
-    <ModesSupported>1</ModesSupported>
-    <Position>BACK_AUX</Position>
-    <MountAngle>360</MountAngle>
-    <CSIInfo>
-      <CSIDCore>1</CSIDCore>
-      <LaneMask>0x1F</LaneMask>
-      <LaneAssign>0x4320</LaneAssign>
-      <ComboMode>0</ComboMode>
-    </CSIInfo>
-    <LensInfo>
-      <FocalLength>4.73</FocalLength>
-      <FNumber>2.2</FNumber>
-      <TotalFocusDistance>1.9</TotalFocusDistance>
-      <HorizontalViewAngle>64.1</HorizontalViewAngle>
-      <VerticalViewAngle>51.6</VerticalViewAngle>
-      <MinFocusDistance>0.1</MinFocusDistance>
-    </LensInfo>
-  </CameraModuleConfig>
-  <CameraModuleConfig>
     <CameraId>0</CameraId>
     <SensorName>s5k3l8</SensorName>
     <EepromName>mayang_dw9763_s5k3l8</EepromName>
@@ -198,31 +148,6 @@ LensInfo : Information of the lens present in the module.
     <MountAngle>90</MountAngle>
     <CSIInfo>
       <CSIDCore>0</CSIDCore>
-      <LaneMask>0x1F</LaneMask>
-      <LaneAssign>0x4320</LaneAssign>
-      <ComboMode>0</ComboMode>
-    </CSIInfo>
-    <LensInfo>
-      <FocalLength>3.44</FocalLength>
-      <FNumber>2.2</FNumber>
-      <TotalFocusDistance>1.9</TotalFocusDistance>
-      <HorizontalViewAngle>64.1</HorizontalViewAngle>
-      <VerticalViewAngle>51.6</VerticalViewAngle>
-      <MinFocusDistance>0.1</MinFocusDistance>
-    </LensInfo>
-  </CameraModuleConfig>
-   <CameraModuleConfig>
-    <CameraId>1</CameraId>
-    <SensorName>s5k3l8_mono</SensorName>
-    <EepromName>mayang_dw9763_s5k3l8_mono</EepromName>
-    <ActuatorName>dw9763_mono</ActuatorName>
-    <ChromatixName>s5k3l8_mono_chromatix</ChromatixName>
-    <FlashName>pmic</FlashName>
-    <ModesSupported>1</ModesSupported>
-    <Position>BACK_AUX</Position>
-    <MountAngle>360</MountAngle>
-    <CSIInfo>
-      <CSIDCore>1</CSIDCore>
       <LaneMask>0x1F</LaneMask>
       <LaneAssign>0x4320</LaneAssign>
       <ComboMode>0</ComboMode>
