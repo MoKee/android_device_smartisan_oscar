@@ -300,6 +300,3 @@ voice.conc.fallbackpath=deep-buffer
 voice.playback.conc.disabled=true
 voice.record.conc.disabled=false
 voice.voip.conc.disabled=true
-
-# Fingerprint
-ro.hardware.fingerprint=blestech
