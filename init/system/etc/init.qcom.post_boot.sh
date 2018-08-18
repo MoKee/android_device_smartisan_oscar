@@ -74,7 +74,6 @@ function configure_memory_parameters() {
     if [ "$arch_type" == "aarch64" ] && [ $MemTotal -gt 2097152 ]; then
         echo 10 > /sys/module/process_reclaim/parameters/pressure_min
         echo 1024 > /sys/module/process_reclaim/parameters/per_swap_size
-        echo "18432,23040,27648,32256,55296,80640" > /sys/module/lowmemorykiller/parameters/minfree
         echo 81250 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
         adjZeroMinFree=18432
     elif [ "$arch_type" == "aarch64" ] && [ $MemTotal -gt 1048576 ]; then
@@ -103,7 +102,8 @@ function configure_memory_parameters() {
     # Zram disk - 512MB size
     zram_enable=`getprop ro.config.zram`
     if [ "$zram_enable" == "true" ]; then
-        echo 536870912 > /sys/block/zram0/disksize
+        echo 3 > /sys/block/zram0/max_comp_streams
+        echo 1536M > /sys/block/zram0/disksize
         mkswap /dev/block/zram0
         swapon /dev/block/zram0 -p 32758
     fi
