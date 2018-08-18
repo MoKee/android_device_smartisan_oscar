@@ -89,4 +89,15 @@ $(PRONTO_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /system/lib/modules/pronto/pronto_wlan.ko $@
 ALL_DEFAULT_INSTALLED_MODULES += $(PRONTO_SYMLINK)
 
+GOODIXFP_IMGS := goodixfp.b00 goodixfp.b01 goodixfp.b02 goodixfp.b03 \
+                 goodixfp.b04 goodixfp.b05 goodixfp.b06 goodixfp.mdt
+GOODIXFP_SYMLINK := $(addprefix $(TARGET_OUT_ETC)/firmware/,$(notdir $(GOODIXFP_IMGS)))
+$(GOODIXFP_SYMLINK): $(LOCAL_INSTALLED_MODULE)
+	@echo "Goodix images link: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /firmware/image/$(notdir $@) $@
+
+ALL_DEFAULT_INSTALLED_MODULES += $(GOODIXFP_SYMLINK)
+
 endif
