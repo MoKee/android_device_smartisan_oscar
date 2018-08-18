@@ -1421,6 +1421,7 @@ vendor/lib64/sensors.elliptic.so
 vendor/lib64/sensors.ssc.so
 
 # Thermal
+etc/thermal-engine.conf
 vendor/bin/thermal-engine
 vendor/lib/libthermalclient.so
 vendor/lib64/libthermalclient.so
@@ -1430,7 +1431,6 @@ vendor/lib64/libthermalioctl.so
 etc/firmware/ice40.bin
 
 # Wi-Fi
-bin/wcnss_service
 etc/firmware/wlan/prima/WCNSS_cfg.dat
 etc/wifi/WCNSS_qcom_wlan_nv.bin
 etc/wifi/WCNSS_wlan_dictionary.dat

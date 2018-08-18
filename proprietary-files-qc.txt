@@ -10,9 +10,12 @@ vendor/lib64/libfastcvadsp_stub.so
 vendor/lib64/libfastcvopt.so
 
 # ADSP modules
+vendor/lib/rfsa/adsp/Elevoc_ecns_capi2.so
+vendor/lib/rfsa/adsp/dirac_resource.dar
 vendor/lib/rfsa/adsp/libFastRPC_AUE_Forward_skel.so
 vendor/lib/rfsa/adsp/libFastRPC_UTF_Forward_skel.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
+vendor/lib/rfsa/adsp/libdirac-capiv2.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
@@ -128,7 +131,11 @@ vendor/lib64/libdpmtcm.so
 bin/qseecomd
 vendor/bin/qseeproxydaemon
 vendor/lib/libQSEEComAPI.so
+vendor/lib/libStDrvInt.so
 vendor/lib/libcppf.so
+vendor/lib/librpmb.so
+vendor/lib/libssd.so
+vendor/lib/libtzdrmgenprov.so
 vendor/lib64/lib-sec-disp.so
 vendor/lib64/libGPTEE.so
 vendor/lib64/libGPreqcancel.so
@@ -146,18 +153,25 @@ vendor/lib64/libsecureuisvc_jni.so
 vendor/lib64/libssd.so
 vendor/lib64/libtzdrmgenprov.so
 
+# DRM - Playready
+vendor/lib/qcdrm/playready/lib/drm/libdrmprplugin_customer.so
+vendor/lib/qcdrm/playready/lib/libprdrmdecrypt_customer.so
+vendor/lib/qcdrm/playready/lib/libtzplayready_customer.so
+vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmdecrypt_customer.so
+vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmplugin_customer.so
+
 # Gatekeeper
 vendor/lib/hw/gatekeeper.msm8953.so
 vendor/lib64/hw/gatekeeper.msm8953.so
 
 # GPS
--framework/com.qti.location.sdk.jar
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 bin/loc_launcher
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.vzw_library.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
+framework/com.qti.location.sdk.jar
 framework/com.qualcomm.location.vzw_library.jar
 framework/izat.xt.srv.jar
 lib/libloc_api_v02.so
@@ -182,6 +196,7 @@ vendor/lib/libxt_native.so
 vendor/lib/libxtadapter.so
 vendor/lib64/hw/flp.default.so
 vendor/lib64/libDRPlugin.so
+vendor/lib64/lib_drplugin_server.so
 vendor/lib64/libalarmservice_jni.so
 vendor/lib64/libdataitems.so
 vendor/lib64/libdrplugin_client.so
@@ -193,9 +208,11 @@ vendor/lib64/libizat_client_api.so
 vendor/lib64/libizat_core.so
 vendor/lib64/liblbs_core.so
 vendor/lib64/libloc_ext.so
+vendor/lib64/libloc_externalDr.so
 vendor/lib64/liblocationservice.so
 vendor/lib64/liblocationservice_glue.so
 vendor/lib64/liblowi_client.so
+vendor/lib64/libquipc_os_api.so
 vendor/lib64/libslimclient.so
 vendor/lib64/libulp2.so
 vendor/lib64/libxt_native.so
@@ -317,8 +334,10 @@ vendor/lib64/libwms.so
 -priv-app/QtiTetherService/QtiTetherService.apk
 vendor/lib/libQtiTether.so
 vendor/lib/libconnctrl.so
+vendor/lib/libcsm_data.so
 vendor/lib64/libQtiTether.so
 vendor/lib64/libconnctrl.so
+vendor/lib64/libcsm_data.so
 
 # Perf
 bin/energy-awareness
@@ -326,9 +345,13 @@ bin/iop
 bin/msm_irqbalance
 vendor/bin/perfd
 vendor/lib/libqti-iop-client.so
+vendor/lib/libqti-iop.so
 vendor/lib/libqti-perfd-client.so
+vendor/lib/libqti_performance.so
 vendor/lib64/libqti-iop-client.so
+vendor/lib64/libqti-iop.so
 vendor/lib64/libqti-perfd-client.so
+vendor/lib64/libqti_performance.so
 
 # Peripheral manager
 bin/pm-proxy
@@ -369,7 +392,6 @@ vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
 vendor/lib64/libidl.so
 vendor/lib64/libqcci_legacy.so
-vendor/lib64/libqcmaputils.so
 vendor/lib64/libqdi.so
 vendor/lib64/libqdp.so
 vendor/lib64/libqmi.so
@@ -410,6 +432,7 @@ vendor/lib64/libconfigdb.so
 vendor/lib64/liblqe.so
 vendor/lib64/libmdmdetect.so
 vendor/lib64/libnetmgr.so
+vendor/lib64/libqcmaputils.so
 vendor/lib64/libril-qc-ltedirectdisc.so
 vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
@@ -427,8 +450,10 @@ bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
 etc/permissions/imscm.xml
+etc/permissions/qti-vzw-ims-internal.xml
 framework/imscmlibrary.jar
 framework/rcsimssettings.jar
+vendor/framework/qti-vzw-ims-internal.jar
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
 vendor/lib64/lib-imsSDP.so
@@ -460,6 +485,9 @@ vendor/lib64/libvoice-svc.so
 bin/time_daemon
 vendor/lib/libTimeService.so
 vendor/lib64/libTimeService.so
+
+# Widevine
+vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wi-Fi
 bin/cnss-daemon
