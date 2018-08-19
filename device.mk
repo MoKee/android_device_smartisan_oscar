@@ -188,9 +188,7 @@ PRODUCT_PACKAGES += \
     gps.msm8953 \
     libgnsspps \
     libgps.utils \
-    libloc_api_v02 \
     libloc_core \
-    libloc_ds_api \
     libloc_eng \
     libloc_pla \
     libloc_stub
