@@ -280,6 +280,7 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
+    wcnss_service \
     wpa_supplicant \
     wpa_supplicant.conf
 
