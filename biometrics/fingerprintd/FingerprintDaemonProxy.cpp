@@ -16,13 +16,15 @@
 
 #define LOG_TAG "fingerprintd"
 
+#include <android/security/IKeystoreService.h>
 #include <binder/IServiceManager.h>
 #include <hardware/hardware.h>
 #include <hardware/fingerprint.h>
 #include <hardware/hw_auth_token.h>
-#include <keystore/IKeystoreService.h>
 #include <keystore/keystore.h> // for error codes
+#include <keystore/keystore_return_types.h>
 #include <utils/Log.h>
+#include <utils/String16.h>
 
 #include "FingerprintDaemonProxy.h"
 
@@ -109,11 +111,13 @@ void FingerprintDaemonProxy::notifyKeystore(const uint8_t *auth_token, const siz
         // TODO: cache service?
         sp < IServiceManager > sm = defaultServiceManager();
         sp < IBinder > binder = sm->getService(String16("android.security.keystore"));
-        sp < IKeystoreService > service = interface_cast < IKeystoreService > (binder);
+        sp<security::IKeystoreService> service = interface_cast<security::IKeystoreService>(binder);
         if (service != NULL) {
-            status_t ret = service->addAuthToken(auth_token, auth_token_length);
-            if (ret != ResponseCode::NO_ERROR) {
-                ALOGE("Falure sending auth token to KeyStore: %d", ret);
+            std::vector<uint8_t> auth_token_vector(auth_token, (auth_token) + auth_token_length);
+            int result = 0;
+            auto binder_result = service->addAuthToken(auth_token_vector, &result);
+            if (!binder_result.isOk() || !keystore::KeyStoreServiceReturnCode(result).isOk()) {
+                ALOGE("Failure sending auth token to KeyStore: %" PRId32, result);
             }
         } else {
             ALOGE("Unable to communicate with KeyStore");
