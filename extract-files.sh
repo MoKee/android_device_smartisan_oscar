@@ -61,13 +61,4 @@ extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 extract "$MY_DIR"/proprietary-files-qc.txt "$SRC" "$SECTION"
 extract "$MY_DIR"/proprietary-files-qc-perf.txt "$SRC" "$SECTION"
 
-function fix_blestech () {
-    sed -i \
-        's/blestech.fingerprint/fingerprint\x00\x00\x00\x00\x00\x00\x00\x00\x00/' \
-        "$MK_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary/"$1"
-}
-
-fix_blestech lib64/hw/fingerprint.blestech.so
-fix_blestech lib64/libBtlFpService.so
-
 "$MY_DIR"/setup-makefiles.sh
