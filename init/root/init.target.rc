@@ -96,6 +96,71 @@ service btlfpserver /system/bin/btlfpserver
 on init
    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
+    write /dev/cpuctl/cpu.rt_runtime_us 940000
+
+    mkdir /dev/cpuctl/bg_non_interactive
+    chown system system /dev/cpuctl/bg_non_interactive/tasks
+    chown system system /dev/cpuctl/bg_non_interactive/cpu.cfs_quota_us
+    chmod 0666 /dev/cpuctl/bg_non_interactive/tasks
+    # 5.0 %
+    write /dev/cpuctl/bg_non_interactive/cpu.shares 52
+    # 1n of 4 little core, means 30% in 2 cores, 15% in 4 cores
+    write /dev/cpuctl/bg_non_interactive/cpu.cfs_period_us 100000
+    write /dev/cpuctl/bg_non_interactive/cpu.rt_period_us 1000000
+    # active FIFO threads will never be in BG
+    write /dev/cpuctl/bg_non_interactive/cpu.rt_runtime_us 10000
+
+    #smartisanOS Ext, for 3rd background app, more restrains
+    mkdir /dev/cpuctl/bg_3rd_app
+    chown system system /dev/cpuctl/bg_3rd_app/tasks
+    chmod 0666 /dev/cpuctl/bg_3rd_app/tasks
+    # 2.5 %
+    write /dev/cpuctl/bg_3rd_app/cpu.shares 26
+    # 0.6n of 4 little core, means 30% in 2 cores, 15% in 4 cores
+    write /dev/cpuctl/bg_3rd_app/cpu.cfs_quota_us  -1
+    write /dev/cpuctl/bg_3rd_app/cpu.cfs_period_us 100000
+    write /dev/cpuctl/bg_3rd_app/cpu.rt_runtime_us 10000
+    write /dev/cpuctl/bg_3rd_app/cpu.rt_period_us 1000000
+    chown system system /dev/cpuctl/bg_3rd_app/cpu.cfs_quota_us
+
+    # Create cgroup mount points for block io groups
+    mkdir /dev/blkio
+    mount cgroup none /dev/blkio blkio
+    chown system system /dev/blkio
+    chown system system /dev/blkio/tasks
+    chmod 0666 /dev/blkio/tasks
+    write /dev/blkio/blkio.weight 1000
+
+    mkdir /dev/blkio/bg_3rd_app
+    chown system system /dev/blkio/bg_3rd_app
+    chown system system /dev/blkio/bg_3rd_app/tasks
+    chmod 0666 /dev/blkio/bg_3rd_app/tasks
+    write /dev/blkio/bg_3rd_app/blkio.weight 1000
+
+    write /dev/cpuset/foreground/cpus 0-5
+    write /dev/cpuset/foreground/boost/cpus 0-5
+
+    write /dev/cpuset/background/cpus 0-1
+
+    mkdir /dev/cpuset/bg_3rd_app
+    write /dev/cpuset/bg_3rd_app/cpus 2-3
+    write /dev/cpuset/bg_3rd_app/mems 0
+
+    mkdir /dev/cpuset/dex2oat
+    write /dev/cpuset/dex2oat/cpus 0-4
+    write /dev/cpuset/dex2oat/mems 0
+
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/top-app/cpus 0-7
+
+    chown system system /dev/cpuset/bg_3rd_app
+    chown system system /dev/cpuset/bg_3rd_app/tasks
+    chmod 0666 /dev/cpuset/dex2oat/tasks
+
+    chown system system /dev/cpuset/dex2oat
+    chown system system /dev/cpuset/dex2oat/tasks
+    chmod 0664 /dev/cpuset/bg_3rd_app/tasks
+
 service per_proxy /system/bin/pm-proxy
     class core
     user system
@@ -178,13 +243,6 @@ on boot
     chown system drmrpc /sys/devices/soc.0/78b8000.i2c/i2c-4/4-0020/input/input0/secure_touch
 
     chmod 0666 /dev/goodix_fp
-
-    mkdir /dev/cpuset/dex2oat
-    write /dev/cpuset/dex2oat/cpus 0-4
-    write /dev/cpuset/dex2oat/mems 0
-    chown system system /dev/cpuset/dex2oat
-    chown system system /dev/cpuset/dex2oat/tasks
-    chmod 0666 /dev/cpuset/dex2oat/tasks
 
 # blestech fingerprint
     chmod 0666	/dev/blfp
