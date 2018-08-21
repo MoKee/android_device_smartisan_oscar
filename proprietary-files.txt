@@ -3,8 +3,6 @@ lib/hw/audio.primary.msm8953.so
 lib/libaudioroute.so
 lib64/hw/audio.primary.msm8953.so
 lib64/libaudioroute.so
-vendor/lib/libhwdaphal.so
-vendor/lib64/libhwdaphal.so
 
 # Bluetooth
 lib/hw/bluetooth.default.so:lib/hw/bluetooth.msm8953.so
@@ -1419,13 +1417,6 @@ vendor/lib64/libsensor_reg.so
 vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.elliptic.so
 vendor/lib64/sensors.ssc.so
-
-# Thermal
-etc/thermal-engine.conf
-vendor/bin/thermal-engine
-vendor/lib/libthermalclient.so
-vendor/lib64/libthermalclient.so
-vendor/lib64/libthermalioctl.so
 
 # USB firmware
 etc/firmware/ice40.bin

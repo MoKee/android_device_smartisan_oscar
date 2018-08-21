@@ -59,6 +59,7 @@ setup_vendor "$DEVICE" "$VENDOR" "$MK_ROOT" false "$CLEAN_VENDOR"
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 extract "$MY_DIR"/proprietary-files-qc.txt "$SRC" "$SECTION"
+extract "$MY_DIR"/proprietary-files-qc-perf.txt "$SRC" "$SECTION"
 
 function fix_blestech () {
     sed -i \

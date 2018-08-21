@@ -41,6 +41,7 @@ vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
 vendor/lib/libaudiodevarb.so
 vendor/lib/libdrc.so
+vendor/lib/libhwdaphal.so
 vendor/lib/libqct_resampler.so
 vendor/lib/libsurround_3mic_proc.so
 vendor/lib/soundfx/libqcbassboost.so
@@ -54,6 +55,7 @@ vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
 vendor/lib64/libaudioalsa.so
 vendor/lib64/libaudiodevarb.so
+vendor/lib64/libhwdaphal.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
@@ -341,17 +343,7 @@ vendor/lib64/libcsm_data.so
 
 # Perf
 bin/energy-awareness
-bin/iop
 bin/msm_irqbalance
-vendor/bin/perfd
-vendor/lib/libqti-iop-client.so
-vendor/lib/libqti-iop.so
-vendor/lib/libqti-perfd-client.so
-vendor/lib/libqti_performance.so
-vendor/lib64/libqti-iop-client.so
-vendor/lib64/libqti-iop.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib64/libqti_performance.so
 
 # Peripheral manager
 bin/pm-proxy
@@ -477,6 +469,13 @@ vendor/lib64/libimscamera_jni.so
 vendor/lib64/libimsmedia_jni.so
 vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
+
+# Thermal
+etc/thermal-engine.conf
+vendor/bin/thermal-engine
+vendor/lib/libthermalclient.so
+vendor/lib64/libthermalclient.so
+vendor/lib64/libthermalioctl.so
 
 # Time services
 -app/TimeService/TimeService.apk
