@@ -32,9 +32,6 @@ etc/acdbdata/MTP/MTP_Speaker_cal.acdb
 etc/acdbdata/MTP/workspaceFile.qwsp
 etc/acdbdata/adsp_avs_config.acdb
 
-# Bluetooth
-lib/hw/bluetooth.default.so:lib/hw/bluetooth.msm8953.so
-
 # Bluetooth firmware
 etc/firmware/nvm_tlv.bin
 etc/firmware/nvm_tlv_1.3.bin

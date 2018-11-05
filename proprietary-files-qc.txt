@@ -47,6 +47,7 @@ vendor/lib64/soundfx/libqcvirt.so
 bin/btnvtool
 bin/hci_qcomm_init
 bin/wcnss_filter
+lib/hw/bluetooth.default.so:lib/hw/bluetooth.msm8953.so
 vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
 
