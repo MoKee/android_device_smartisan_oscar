@@ -1,0 +1,3 @@
+-keep class org.mokee.settings.device.oscar.* {
+  *;
+}

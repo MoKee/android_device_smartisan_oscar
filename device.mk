@@ -201,6 +201,9 @@ PRODUCT_BOOT_JARS += \
     ifaa_fw
 
 # Input
+PRODUCT_PACKAGES += \
+    KeyHandlerOscar
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/betterlife-blfp.kl:system/usr/keylayout/betterlife-blfp.kl
 
