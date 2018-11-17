@@ -32,6 +32,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final String TAG = "KeyHandler";
 
     private static final String DEVICE_BETTERLIFE = "betterlife-blfp";
+    private static final String DEIVCE_GOODIX = "gf3206";
 
     private final int doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout();
 
@@ -49,7 +50,8 @@ public class KeyHandler implements DeviceKeyHandler {
         }
 
         if (trustedDeviceId == 0) {
-            if (DEVICE_BETTERLIFE.equals(getDeviceName(event))) {
+            final String deviceName = getDeviceName(event);
+            if (DEVICE_BETTERLIFE.equals(deviceName) || DEIVCE_GOODIX.equals(deviceName)) {
                 trustedDeviceId = event.getDeviceId();
             } else {
                 return event;
