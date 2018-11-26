@@ -23,6 +23,10 @@
 
 $(call inherit-product, vendor/smartisan/oscar/oscar-vendor.mk)
 
+# Vendor security patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2018-09-01
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
