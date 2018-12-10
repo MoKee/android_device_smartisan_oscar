@@ -1502,12 +1502,11 @@ etc/firmware/a530_pfp.fw:vendor/firmware/a530_pfp.fw
 etc/firmware/a530_pm4.fw:vendor/firmware/a530_pm4.fw
 
 # Sensors
-etc/elliptic_fusion_sensor.xml
-etc/elliptic_sensor.xml
+etc/elliptic_sensor.xml:vendor/etc/elliptic_sensor.xml
 etc/sensors/hals.conf:vendor/etc/sensors/hals.conf
 etc/sensors/sensor_def_qcomdev.conf:vendor/etc/sensors/sensor_def_qcomdev.conf
 lib64/libnotifyaudiohal.so:vendor/lib64/libnotifyaudiohal.so
-vendor/lib64/sensors.elliptic.so
+vendor/lib64/sensors.elliptic.so|39f3420e7e15c77356a9a304ba69935f53c34dba
 
 # Wi-Fi
 etc/wifi/WCNSS_qcom_wlan_nv.bin
