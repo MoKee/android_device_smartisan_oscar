@@ -18,8 +18,12 @@ vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 # Audio
 lib/hw/audio.primary.msm8953.so
 lib/libaudioroute.so
+lib/libtinycompress.so
 lib64/hw/audio.primary.msm8953.so
 lib64/libaudioroute.so
+lib64/libtinycompress.so
+vendor/lib/libhwdaphal.so
+vendor/lib64/libhwdaphal.so
 
 # Audio ACDB
 etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
