@@ -1,0 +1,3 @@
+# Audio
+ro.vendor.audio.sdk.fluencetype=none
+vendor.audio.offload.multiple.enabled=false
