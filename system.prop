@@ -1,3 +1,10 @@
 # Audio
 ro.vendor.audio.sdk.fluencetype=none
 vendor.audio.offload.multiple.enabled=false
+
+# Radio
+persist.nfc.smartcard.config=SIM1,SIM2,eSE1
+persist.radio.facnotsup_as_nonw=1
+persist.radio.ignore_dom_time=5
+persist.radio.report_codec=1
+ro.telephony.default_network=22,22
