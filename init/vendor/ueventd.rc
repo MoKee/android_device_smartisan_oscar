@@ -296,3 +296,7 @@
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system
+
+# Elliptic
+/dev/elliptic0            0666   root       root
+/dev/elliptic1            0666   root       root

@@ -1,0 +1,11 @@
+on post-fs-data
+    chown system system /system/etc/wifi/WCNSS_qcom_wlan_nv.bin
+
+on boot
+    chmod 0666 /dev/blfp
+    chmod 0666 /dev/goodix_fp
+
+service btlfpserver /system/bin/btlfpserver
+    class late_start
+    user system
+    group system input
