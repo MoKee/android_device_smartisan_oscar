@@ -1477,21 +1477,19 @@ etc/firmware/cpp_firmware_v1_8_0.fw
 etc/firmware/cpp_firmware_v1_10_0.fw
 etc/firmware/cpp_firmware_v1_12_0.fw
 
-# Fingerprint
-bin/fingerprintd
-
 # Fingerprint - Goodix
-lib64/hw/fingerprint.default.so
-lib64/libgf_ca.so
-lib64/libgf_hal.so
-lib64/libgoodixfingerprintd_binder.so
+bin/fingerprintd:vendor/bin/gx_fpd
+lib64/hw/fingerprint.default.so:vendor/lib64/hw/fingerprint.default.so
+lib64/libgf_ca.so:vendor/lib64/libgf_ca.so
+lib64/libgf_hal.so:vendor/lib64/libgf_hal.so
+lib64/libgoodixfingerprintd_binder.so:vendor/lib64/libgoodixfingerprintd_binder.so
 
 # Fingerprint - Betterlife
-bin/btlfpserver
-lib64/hw/blestech.fingerprint.default.so
-lib64/libBtlFpHal.so
-lib64/libBtlFpService.so
-lib64/libxuFPAlg.so
+bin/btlfpserver:vendor/bin/btlfpserver
+lib64/hw/blestech.fingerprint.default.so:vendor/lib64/hw/blestech.fingerprint.default.so
+lib64/libBtlFpHal.so:vendor/lib64/libBtlFpHal.so
+lib64/libBtlFpService.so:vendor/lib64/libBtlFpService.so
+lib64/libxuFPAlg.so:vendor/lib64/libxuFPAlg.so
 
 # Fingerprint firmware - Betterlife
 etc/firmware/btlap64.b00:vendor/firmware/btlap64.b00
