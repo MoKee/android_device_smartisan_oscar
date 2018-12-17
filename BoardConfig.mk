@@ -47,6 +47,7 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Releasetools
 TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # inherit from the proprietary version
 -include vendor/smartisan/oscar/BoardConfigVendor.mk
