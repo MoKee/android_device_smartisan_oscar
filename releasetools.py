@@ -1,5 +1,5 @@
 # Copyright (C) 2009 The Android Open Source Project
-# Copyright (C) 2018 The MoKee Open Source Project
+# Copyright (C) 2018-2019 The MoKee Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,10 @@ def FullOTA_Assertions(info):
   AddModemAssertion(info)
   return
 
+def FullOTA_InstallBegin(info):
+  KillMagisk(info)
+  return
+
 def IncrementalOTA_Assertions(info):
   AddModemAssertion(info)
   return
@@ -32,3 +36,8 @@ def AddModemAssertion(info):
       cmd = 'assert(smartisan.verify_modem("' + version + '") == "1");'
       info.script.AppendExtra(cmd)
   return
+
+def KillMagisk(info):
+  info.script.Mount("/system")
+  info.script.AppendExtra('delete("/system/addon.d/99-magisk.sh");')
+  info.script.Unmount("/system")
