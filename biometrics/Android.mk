@@ -17,6 +17,7 @@ LOCAL_SRC_FILES := \
 LOCAL_SHARED_LIBRARIES := \
     libbinder \
     libutils \
+    libcutils \
     liblog \
     libhidlbase \
     libhidltransport \
@@ -25,5 +26,7 @@ LOCAL_SHARED_LIBRARIES := \
     libkeystore_aidl \
     libkeystore_binder \
     android.hardware.biometrics.fingerprint@2.1
+
+LOCAL_CFLAGS := -DSMARTISAN_HACK
 
 include $(BUILD_EXECUTABLE)

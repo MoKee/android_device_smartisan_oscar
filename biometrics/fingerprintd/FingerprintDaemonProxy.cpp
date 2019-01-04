@@ -26,6 +26,11 @@
 #include <utils/Log.h>
 #include <utils/String16.h>
 
+#ifdef SMARTISAN_HACK
+#include <sys/stat.h>
+#include <cutils/properties.h>
+#endif
+
 #include "FingerprintDaemonProxy.h"
 
 namespace android {
@@ -34,6 +39,11 @@ FingerprintDaemonProxy* FingerprintDaemonProxy::sInstance = NULL;
 
 // Supported fingerprint HAL version
 static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
+
+#ifdef SMARTISAN_HACK
+#define FP_VENDORS 2
+static const char aFingerprint[FP_VENDORS][40] = {"fingerprint", "blestech.fingerprint"};
+#endif
 
 FingerprintDaemonProxy::FingerprintDaemonProxy() : mModule(NULL), mDevice(NULL), mCallback(NULL) {
 
@@ -204,28 +214,78 @@ int64_t FingerprintDaemonProxy::openHal() {
     ALOG(LOG_VERBOSE, LOG_TAG, "nativeOpenHal()\n");
     int err;
     const hw_module_t *hw_module = NULL;
+#ifdef SMARTISAN_HACK
+hw_device_t *device = NULL;
+const char *fingerprint_id;
+const char *id;
+
+ALOGD("Sleep 10s to wait fingerprint sensor gets ready...");
+sleep(10);
+
+for (int i = 0; i < FP_VENDORS; i++) {
+    id = aFingerprint[i];
+    ALOGD("open %s  hal start times=%d", id, i);
+    sleep(1);
+
+    if (0 != (err = hw_get_module(id, &hw_module))) {
+#else
     if (0 != (err = hw_get_module(FINGERPRINT_HARDWARE_MODULE_ID, &hw_module))) {
+#endif
         ALOGE("Can't open fingerprint HW Module, error: %d", err);
+#ifdef SMARTISAN_HACK
+        continue;
+#else
         return 0;
+#endif
     }
     if (NULL == hw_module) {
         ALOGE("No valid fingerprint module");
+#ifdef SMARTISAN_HACK
+        continue;
+#else
         return 0;
+#endif
     }
 
     mModule = reinterpret_cast<const fingerprint_module_t*>(hw_module);
 
     if (mModule->common.methods->open == NULL) {
         ALOGE("No valid open method");
+#ifdef SMARTISAN_HACK
+        continue;
+#else
         return 0;
+#endif
     }
 
+#ifndef SMARTISAN_HACK
     hw_device_t *device = NULL;
+#endif
 
     if (0 != (err = mModule->common.methods->open(hw_module, NULL, &device))) {
         ALOGE("Can't open fingerprint methods, error: %d", err);
+#ifdef SMARTISAN_HACK
+        continue;
+#else
         return 0;
+#endif
     }
+
+#ifdef SMARTISAN_HACK
+    fingerprint_id = id;
+    break;
+}
+
+if (strcmp(fingerprint_id, "blestech.fingerprint") == 0) {
+    err = property_set("persist.fingerprint", "betterlife");
+    ALOGE("property_set betterlife err:%d", err);
+    mkdir("/data/fpvendor/helitai_bf3582", 0777);
+} else if (strcmp(fingerprint_id, "fingerprint") == 0) {
+    property_set("persist.fingerprint", "goodix");
+} else {
+    ALOGE("Invalid fp id!");
+}
+#endif
 
     if (kVersion != device->version) {
         ALOGE("Wrong fp version. Expected %d, got %d", kVersion, device->version);
@@ -245,6 +305,9 @@ int64_t FingerprintDaemonProxy::openHal() {
     }
 
     ALOG(LOG_VERBOSE, LOG_TAG, "fingerprint HAL successfully initialized");
+#ifdef SMARTISAN_HACK
+    property_set("fingerprint.state", "ok");
+#endif
     return reinterpret_cast<int64_t>(mDevice); // This is just a handle
 }
 

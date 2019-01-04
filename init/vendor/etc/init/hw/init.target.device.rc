@@ -4,6 +4,7 @@ on post-fs-data
 on boot
     chmod 0666 /dev/blfp
     chmod 0666 /dev/goodix_fp
+    mkdir /data/fpvendor 0777 system system
 
     # Key Disabler
     chown system system /sys/devices/soc/soc:goodix_fp/key_disabled
