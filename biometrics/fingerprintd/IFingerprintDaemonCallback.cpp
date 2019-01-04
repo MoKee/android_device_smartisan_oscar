@@ -24,6 +24,62 @@
 
 namespace android {
 
+status_t BnFingerprintDaemonCallback::onTransact(uint32_t code, const Parcel& data, Parcel* reply,
+        uint32_t flags) {
+    switch (code) {
+    case ON_ENROLL_RESULT: {
+        CHECK_INTERFACE(IFingerprintDaemonCallback, data, reply);
+        int64_t devId = data.readInt64();
+        int32_t fpId = data.readInt32();
+        int32_t gpId = data.readInt32();
+        int32_t rem = data.readInt32();
+        onEnrollResult(devId, fpId, gpId, rem);
+        return NO_ERROR;
+    }
+    case ON_ACQUIRED: {
+        CHECK_INTERFACE(IFingerprintDaemonCallback, data, reply);
+        int64_t devId = data.readInt64();
+        int32_t acquiredInfo = data.readInt32();
+        onAcquired(devId, acquiredInfo);
+        return NO_ERROR;
+    }
+    case ON_AUTHENTICATED: {
+        CHECK_INTERFACE(IFingerprintDaemonCallback, data, reply);
+        int64_t devId = data.readInt64();
+        int32_t fpId = data.readInt32();
+        int32_t gpId = data.readInt32();
+        onAuthenticated(devId, fpId, gpId);
+        return NO_ERROR;
+    }
+    case ON_ERROR: {
+        CHECK_INTERFACE(IFingerprintDaemonCallback, data, reply);
+        int64_t devId = data.readInt64();
+        int32_t error = data.readInt32();
+        onError(devId, error);
+        return NO_ERROR;
+    }
+    case ON_REMOVED: {
+        CHECK_INTERFACE(IFingerprintDaemonCallback, data, reply);
+        int64_t devId = data.readInt64();
+        int32_t fpId = data.readInt32();
+        int32_t gpId = data.readInt32();
+        onRemoved(devId, fpId, gpId);
+        return NO_ERROR;
+    }
+    case ON_ENUMERATE: {
+        CHECK_INTERFACE(IFingerprintDaemonCallback, data, reply);
+        int64_t devId = data.readInt64();
+        int32_t fpId = data.readInt32();
+        int32_t gpId = data.readInt32();
+        int32_t rem = data.readInt32();
+        onEnumerate(devId, fpId, gpId, rem);
+        return NO_ERROR;
+    }
+    default:
+        return BBinder::onTransact(code, data, reply, flags);
+    }
+}
+
 class BpFingerprintDaemonCallback : public BpInterface<IFingerprintDaemonCallback>
 {
 public:

@@ -36,14 +36,6 @@ static const String16 MANAGE_FINGERPRINT_PERMISSION("android.permission.MANAGE_F
 static const String16 HAL_FINGERPRINT_PERMISSION("android.permission.MANAGE_FINGERPRINT"); // TODO
 static const String16 DUMP_PERMISSION("android.permission.DUMP");
 
-const android::String16
-IFingerprintDaemon::descriptor("android.hardware.fingerprint.IFingerprintDaemon");
-
-const android::String16&
-IFingerprintDaemon::getInterfaceDescriptor() const {
-    return IFingerprintDaemon::descriptor;
-}
-
 status_t BnFingerprintDaemon::onTransact(uint32_t code, const Parcel& data, Parcel* reply,
         uint32_t flags) {
     switch(code) {
@@ -201,5 +193,137 @@ bool BnFingerprintDaemon::checkPermission(const String16& permission) {
     return PermissionCache::checkPermission(permission, calling_pid, calling_uid);
 }
 
+class BpFingerprintDaemon : public BpInterface<IFingerprintDaemon> {
+    public:
+        BpFingerprintDaemon(const sp<IBinder> & impl) :
+                BpInterface<IFingerprintDaemon>(impl) {
+        }
+
+        virtual void init(const sp<IFingerprintDaemonCallback>& callback) {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            data.writeStrongBinder(callback->asBinder(callback));
+            remote()->transact(INIT, data, &reply);
+            reply.readExceptionCode();
+            return;
+        }
+
+        virtual int32_t enroll(const uint8_t* token, ssize_t tokenLength, int32_t groupId, int32_t timeout) {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            data.writeInt32(tokenLength);
+            data.write(token, tokenLength);
+            data.writeInt32(groupId);
+            data.writeInt32(timeout);
+            remote()->transact(ENROLL, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual uint64_t preEnroll() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(PRE_ENROLL, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt64();
+        }
+
+        virtual int32_t postEnroll() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(POST_ENROLL, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual int32_t stopEnrollment() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(CANCEL_ENROLLMENT, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual int32_t authenticate(uint64_t sessionId, uint32_t groupId) {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            data.writeInt64(sessionId);
+            data.writeInt32(groupId);
+            remote()->transact(AUTHENTICATE, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual int32_t stopAuthentication() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(CANCEL_AUTHENTICATION, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual int32_t remove(int32_t fingerId, int32_t groupId) {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            data.writeInt32(fingerId);
+            data.writeInt32(groupId);
+            remote()->transact(REMOVE, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual int32_t enumerate() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(ENUMERATE, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual uint64_t getAuthenticatorId() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(GET_AUTHENTICATOR_ID, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt64();
+        }
+
+        virtual int32_t setActiveGroup(int32_t groupId, const uint8_t* path, ssize_t pathLen) {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            data.writeInt32(groupId);
+            data.writeInt32(pathLen);
+            data.write(path, pathLen);
+            remote()->transact(SET_ACTIVE_GROUP, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual int64_t openHal() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(OPEN_HAL, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt64();
+        }
+
+        virtual int32_t closeHal() {
+            Parcel data, reply;
+            data.writeInterfaceToken(descriptor);
+            remote()->transact(CLOSE_HAL, data, &reply);
+            reply.readExceptionCode();
+            return reply.readInt32();
+        }
+
+        virtual void binderDied(const wp<IBinder> __unused &who) {
+            return;
+        }
+
+        virtual void hal_notify_callback(const fingerprint_msg_t __unused *msg) {
+            return;
+        }
+};
+
+IMPLEMENT_META_INTERFACE(FingerprintDaemon, "android.hardware.fingerprint.IFingerprintDaemon");
 
 }; // namespace android

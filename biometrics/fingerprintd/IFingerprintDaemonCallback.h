@@ -49,6 +49,12 @@ class IFingerprintDaemonCallback : public IInterface {
         DECLARE_META_INTERFACE(FingerprintDaemonCallback);
 };
 
+class BnFingerprintDaemonCallback: public BnInterface<IFingerprintDaemonCallback> {
+    public:
+        virtual status_t onTransact(uint32_t code, const Parcel& data, Parcel* reply,
+                uint32_t flags = 0);
+};
+
 }; // namespace android
 
 #endif // IFINGERPRINT_DAEMON_CALLBACK_H_

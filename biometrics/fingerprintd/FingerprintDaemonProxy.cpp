@@ -173,6 +173,11 @@ int32_t FingerprintDaemonProxy::enumerate() {
     return mDevice->enumerate(mDevice);
 }
 
+int32_t FingerprintDaemonProxy::cancel() {
+    int ret = mDevice->cancel(mDevice);
+    return ret;
+}
+
 uint64_t FingerprintDaemonProxy::getAuthenticatorId() {
     return mDevice->get_authenticator_id(mDevice);
 }
