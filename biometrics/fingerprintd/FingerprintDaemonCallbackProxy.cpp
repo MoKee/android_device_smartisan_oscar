@@ -98,11 +98,12 @@ status_t FingerprintDaemonCallbackProxy::onError(int64_t devId, int32_t error) {
 }
 
 status_t FingerprintDaemonCallbackProxy::onRemoved(int64_t devId,
-        int32_t fingerId, int32_t groupId) {
+        int32_t fingerId, int32_t groupId, int32_t remaining) {
     fingerprint_msg_t message;
     message.type = FINGERPRINT_TEMPLATE_REMOVED;
     message.data.removed.finger.fid = fingerId;
     message.data.removed.finger.gid = groupId;
+    message.data.removed.remaining_templates = remaining;
 
     if(mNotify != NULL) {
         mNotify(&message);

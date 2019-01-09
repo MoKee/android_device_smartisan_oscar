@@ -63,7 +63,8 @@ status_t BnFingerprintDaemonCallback::onTransact(uint32_t code, const Parcel& da
         int64_t devId = data.readInt64();
         int32_t fpId = data.readInt32();
         int32_t gpId = data.readInt32();
-        onRemoved(devId, fpId, gpId);
+        int32_t rem = data.readInt32();
+        onRemoved(devId, fpId, gpId, rem);
         return NO_ERROR;
     }
     case ON_ENUMERATE: {
@@ -121,12 +122,13 @@ public:
         return remote()->transact(ON_ERROR, data, &reply, IBinder::FLAG_ONEWAY);
     }
 
-    virtual status_t onRemoved(int64_t devId, int32_t fpId, int32_t gpId) {
+    virtual status_t onRemoved(int64_t devId, int32_t fpId, int32_t gpId, int32_t rem) {
         Parcel data, reply;
         data.writeInterfaceToken(IFingerprintDaemonCallback::getInterfaceDescriptor());
         data.writeInt64(devId);
         data.writeInt32(fpId);
         data.writeInt32(gpId);
+        data.writeInt32(rem);
         return remote()->transact(ON_REMOVED, data, &reply, IBinder::FLAG_ONEWAY);
     }
 

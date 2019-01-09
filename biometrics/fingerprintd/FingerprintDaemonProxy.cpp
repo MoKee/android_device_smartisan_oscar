@@ -93,12 +93,14 @@ void FingerprintDaemonProxy::hal_notify_callback(const fingerprint_msg_t *msg) {
                     msg->data.enroll.samples_remaining);
             break;
         case FINGERPRINT_TEMPLATE_REMOVED:
-            ALOGD("onRemove(fid=%d, gid=%d)",
+            ALOGD("onRemove(fid=%d, gid=%d, rem=%d)",
                     msg->data.removed.finger.fid,
-                    msg->data.removed.finger.gid);
+                    msg->data.removed.finger.gid,
+                    msg->data.removed.remaining_templates);
             callback->onRemoved(device,
                     msg->data.removed.finger.fid,
-                    msg->data.removed.finger.gid);
+                    msg->data.removed.finger.gid,
+                    msg->data.removed.remaining_templates);
             break;
         case FINGERPRINT_TEMPLATE_ENUMERATING:
             ALOGD("onEnumerate(fid=%d, gid=%d, rem=%d)",
