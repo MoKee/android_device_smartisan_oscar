@@ -38,5 +38,4 @@ sed -i 's|/system/lib/|/vendor/lib/|g' $BLOB_ROOT/vendor/lib/hw/audio.primary.ms
 sed -i 's|/system/lib/|/vendor/lib/|g' $BLOB_ROOT/vendor/lib64/hw/audio.primary.msm8953.so
 
 # Camera
-sed -i 's|/system/etc/|/vendor/etc/|g' $BLOB_ROOT/vendor/lib/hw/camera.msm8953.so
 sed -i 's|/system/etc/|/vendor/etc/|g' $BLOB_ROOT/vendor/lib/libmmcamera2_sensor_modules.so
