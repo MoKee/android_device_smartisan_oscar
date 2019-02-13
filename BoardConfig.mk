@@ -40,7 +40,7 @@ TARGET_LD_SHIM_LIBS += /system/vendor/lib/hw/camera.msm8953.so|/system/vendor/li
 TARGET_LD_SHIM_LIBS += /system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_camera.so
 
 # MK Hardware
-BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/mkhw
+JAVA_SOURCE_OVERLAYS += org.mokee.hardware|$(DEVICE_PATH)/mkhw|**/*.java
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
