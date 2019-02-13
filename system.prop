@@ -38,6 +38,9 @@ voice.playback.conc.disabled=true
 voice.record.conc.disabled=false
 voice.voip.conc.disabled=true
 
+# Camera
+persist.camera.HAL3.enabled=1
+
 # Radio
 persist.nfc.smartcard.config=SIM1,SIM2,eSE1
 persist.radio.facnotsup_as_nonw=1
