@@ -17,6 +17,7 @@
 #define LOG_TAG "fingerprint@2.1-service.oscar"
 
 #include <android/log.h>
+#include <binder/ProcessState.h>
 #include <hidl/HidlSupport.h>
 #include <hidl/HidlTransportSupport.h>
 #include <android/hardware/biometrics/fingerprint/2.1/IBiometricsFingerprint.h>
@@ -31,6 +32,10 @@ using android::sp;
 
 int main() {
     android::sp<IBiometricsFingerprint> bio = BiometricsFingerprint::getInstance();
+
+    // the conventional HAL might start binder services
+    android::ProcessState::initWithDriver("/dev/binder");
+    android::ProcessState::self()->startThreadPool();
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
