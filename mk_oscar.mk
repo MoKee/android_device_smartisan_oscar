@@ -40,7 +40,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME="oscar" \
     PRIVATE_BUILD_DESC="oscar-user 7.1.2 N2G47H 1 dev-keys"
 
-BUILD_FINGERPRINT := Android/oscar/oscar:7.1.2/N2G47H/1540887975:user/dev-keys
+BUILD_FINGERPRINT := Android/oscar/oscar:7.1.2/N2G47H/1551853511:user/dev-keys
 
 # Sign bootable images
 PRODUCT_SUPPORTS_BOOT_SIGNER := true

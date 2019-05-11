@@ -50,7 +50,7 @@ TARGET_BOARD_INFO_FILE := $(DEVICE_PATH)/board-info.txt
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2018-09-01
+VENDOR_SECURITY_PATCH := 2018-10-10
 
 # inherit from the proprietary version
 -include vendor/smartisan/oscar/BoardConfigVendor.mk
