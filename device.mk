@@ -59,9 +59,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
 
-# Touch
-PRODUCT_PACKAGES += \
-    vendor.mokee.touch@1.0-service.oscar
-
 # Inherit from msm8953-common
 $(call inherit-product, device/smartisan/msm8953-common/common.mk)
