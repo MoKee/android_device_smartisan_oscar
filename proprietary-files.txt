@@ -1414,6 +1414,9 @@ etc/sensors/sensor_def_qcomdev.conf:vendor/etc/sensors/sensor_def_qcomdev.conf
 lib64/libnotifyaudiohal.so:vendor/lib64/libnotifyaudiohal.so
 vendor/lib64/sensors.elliptic.so|39f3420e7e15c77356a9a304ba69935f53c34dba
 
+# Thermal
+etc/thermal-engine.conf:vendor/etc/thermal-engine.conf
+
 # Wi-Fi
 etc/wifi/WCNSS_qcom_wlan_nv.bin
 etc/wifi/WCNSS_wlan_dictionary.dat
