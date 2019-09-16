@@ -26,6 +26,9 @@
 
 DEVICE_PATH := device/smartisan/oscar
 
+# Build
+BUILD_BROKEN_DUP_RULES := true
+
 # Kernel
 TARGET_KERNEL_CONFIG := mokee_oscar_defconfig
 
