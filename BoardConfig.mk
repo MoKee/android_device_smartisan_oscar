@@ -42,7 +42,6 @@ TARGET_USES_AOSP_FOR_AUDIO := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Camera
-DEVICE_SPECIFIC_CAMERA_PATH := $(DEVICE_PATH)/camera
 TARGET_LD_SHIM_LIBS += /system/vendor/lib/libmmcamera_ppeiscore.so|/system/vendor/lib/libshim_camera.so
 
 # Properties
