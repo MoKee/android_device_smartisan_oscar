@@ -35,6 +35,9 @@ TARGET_KERNEL_CONFIG := mokee_oscar_defconfig
 # HAX: SELinux Permissive - Remove ASAP
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
+# Audio
+TARGET_USES_AOSP_FOR_AUDIO := true
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
