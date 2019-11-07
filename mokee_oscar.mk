@@ -43,8 +43,8 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
 BUILD_FINGERPRINT := Android/oscar/oscar:7.1.2/N2G47H/1561092285:user/dev-keys
 
 # Sign bootable images
-PRODUCT_SUPPORTS_BOOT_SIGNER := true
 PRODUCT_SUPPORTS_VERITY := true
-PRODUCT_VERITY_SIGNING_KEY := build/target/product/security/testkey
+PRODUCT_SUPPORTS_BOOT_SIGNER := true
+PRODUCT_VERITY_SIGNING_KEY := build/target/product/security/verity
 
 TARGET_VENDOR := Smartisan
