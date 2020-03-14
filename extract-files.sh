@@ -58,3 +58,8 @@ sed -i 's|/data/misc/camera|/data/vendor/qcam|g' $BLOB_ROOT/vendor/lib/libmmcame
 sed -i 's|/data/misc/camera|/data/vendor/qcam|g' $BLOB_ROOT/vendor/lib/libmmcamera_tintless_bg_pca_algo.so
 sed -i 's|/data/misc/camera|/data/vendor/qcam|g' $BLOB_ROOT/vendor/lib/libmmcamera_tuning.so
 sed -i 's|/data/misc/camera|/data/vendor/qcam|g' $BLOB_ROOT/vendor/lib/libmms_hal_vstab.so
+
+# Fingerprint - Goodix
+patchelf --replace-needed libbinder.so libbindergx.so $BLOB_ROOT/vendor/lib64/hw/fingerprint.default.so
+patchelf --replace-needed libbinder.so libbindergx.so $BLOB_ROOT/vendor/lib64/libgf_hal.so
+patchelf --replace-needed libbinder.so libbindergx.so $BLOB_ROOT/vendor/lib64/libgoodixfingerprintd_binder.so
