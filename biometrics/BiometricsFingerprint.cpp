@@ -25,6 +25,12 @@
 #include <inttypes.h>
 #include <unistd.h>
 
+#include <sys/stat.h>
+#include <cutils/properties.h>
+
+#define FP_VENDORS 2
+static const char aFingerprint[FP_VENDORS][40] = {"fingerprint", "blestech.fingerprint"};
+
 namespace android {
 namespace hardware {
 namespace biometrics {
@@ -209,10 +215,43 @@ IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
 }
 
 fingerprint_device_t* BiometricsFingerprint::openHal() {
+    fingerprint_device_t* fp_device = nullptr;
+    const char *id;
+
+    ALOGI("Sleep 10s to wait fingerprint sensor gets ready...");
+    sleep(10);
+
+    for (int i = 0; i < FP_VENDORS; i++) {
+        id = aFingerprint[i];
+        ALOGI("Opening HAL %s, times=%d", id, i);
+        sleep(1);
+
+        if ((fp_device = openHal(id)) != nullptr) {
+            if (strcmp(id, "blestech.fingerprint") == 0) {
+                ALOGI("Loaded Betterlife HAL");
+                mkdir("/data/fpvendor/helitai_bf3582", 0777);
+                property_set("persist.fingerprint", "betterlife");
+                property_set("fingerprint.state", "ok");
+            } else if (strcmp(id, "fingerprint") == 0) {
+                ALOGI("Loaded Goodix HAL");
+                property_set("persist.fingerprint", "goodix");
+                property_set("fingerprint.state", "ok");
+            } else {
+                ALOGE("Invalid id!");
+            }
+            return fp_device;
+        }
+    }
+
+    ALOGE("No supported HAL loaded!");
+    return nullptr;
+}
+
+fingerprint_device_t* BiometricsFingerprint::openHal(const char *fingerprint_id) {
     int err;
     const hw_module_t *hw_mdl = nullptr;
     ALOGD("Opening fingerprint hal library...");
-    if (0 != (err = hw_get_module(FINGERPRINT_HARDWARE_MODULE_ID, &hw_mdl))) {
+    if (0 != (err = hw_get_module(fingerprint_id, &hw_mdl))) {
         ALOGE("Can't open fingerprint HW Module, error: %d", err);
         return nullptr;
     }
